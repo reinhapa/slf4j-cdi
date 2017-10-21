@@ -43,7 +43,7 @@ asciidoctorj {
 }
 
 dependencies {
-    implementation "slf4j:slf4j-api:1.7.25"
+    implementation "org.slf4j:slf4j-api:1.7.25"
     implementation "javax.enterprise:cdi-api:1.2"
     testImplementation "junit:junit:4.12"
     testImplementation "org.hamcrest:hamcrest-core:1.3"
