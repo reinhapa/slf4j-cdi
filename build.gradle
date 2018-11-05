@@ -1,32 +1,18 @@
 import java.text.SimpleDateFormat
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:1.5.3'
-        classpath 'net.nemerosa:versioning:1.7.1'
-    }
+plugins {
+    id 'java'
+    id 'signing'
+    id 'eclipse'
+    id 'jacoco'
+    id 'maven-publish'
+    id 'org.asciidoctor.convert' version '1.5.7'
+    id 'net.nemerosa.versioning' version '2.7.1'
 }
-
-configurations {
-    asciidoclet
-}
-
-apply plugin: 'java-library'
-apply plugin: 'signing'
-apply plugin: 'eclipse'
-apply plugin: 'jacoco'
-apply plugin: 'maven'
-apply plugin: 'org.asciidoctor.convert'
-apply plugin: 'net.nemerosa.versioning'
 
 group = 'net.reini'
 
 defaultTasks 'build'
-
 
 Date buildTimeAndDate = new Date()
 ext {
@@ -34,12 +20,12 @@ ext {
     buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
 }
 
-repositories {
-    mavenCentral()
+configurations {
+    asciidoclet
 }
 
-asciidoctorj { 
-    version '1.5.5'
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -68,7 +54,7 @@ artifacts {
 }
 
 signing {
-    required { project.hasProperty('signing.password') && !project.version.contains('-SNAPSHOT') }
+    required { project.hasProperty('signing.password') && !project.version.endsWith('-SNAPSHOT') }
     sign configurations.archives
 }
 
@@ -107,51 +93,47 @@ javadoc {
             "title-link=http://github.com/reinhapa/[${project.name} ${project.version}]"
 }
 
-uploadArchives {
-    if (!project.hasProperty('signing.password')) {
-        println "no archives will be uploaded due missing signing password"
-        return
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = 'SLF4J CDI injection providers'
+                description = 'Provides partial backwards compatibility classes in order to more easier migrate to a newer JUnit version.'
+                url = 'https://github.com/reinhapa/slf4j-cdi'
+                scm {
+                    connection = 'scm:git:git@github.com:reinhapa/slf4j-cdi.git'
+                    developerConnection = 'scm:git:git@github.com:reinhapa/slf4j-cdi.git'
+                    url = 'https://github.com/reinhapa/slf4j-cdi.git'
+                }
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                        distribution = 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'reinhapa'
+                        name = 'Patrick Reinhart'
+                        email = 'patrick@reini.net'
+                    }
+                }
+            }
+        }
     }
-    repositories.mavenDeployer {
-        beforeDeployment { 
-            MavenDeployment deployment -> signing.signPom(deployment)
-        }
-
-        repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2/') {
-            authentication(userName: ossrhUsername, password: ossrhPassword)
-        }
-
-        snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots/') {
-            authentication(userName: ossrhUsername, password: ossrhPassword)
-        }
-
-        pom.project {
-            name 'SLF4J CDI injection providers'
-            packaging 'jar'
-            description 'Provides partial backwards compatibility classes in order to more easier migrate to a newer JUnit version.'
-            url 'https://github.com/reinhapa/slf4j-cdi'
-            
-            scm {
-                connection 'scm:git:git@github.com:reinhapa/slf4j-cdi.git'
-                developerConnection 'scm:git:git@github.com:reinhapa/slf4j-cdi.git'
-                url 'https://github.com/reinhapa/slf4j-cdi.git'
+    repositories {
+        maven {
+            def releasesRepoUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            def snapshotsRepoUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
             }
-
-            licenses {
-                license {
-                    name 'MIT License'
-                    url 'http://www.opensource.org/licenses/mit-license.php'
-                    distribution 'repo'
-                }
-            }
-
-            developers {[
-                developer {
-                    id 'reinhapa'
-                    name 'Patrick Reinhart'
-                    email 'patrick@reini.net'
-                }
-            ]}
         }
     }
 }
