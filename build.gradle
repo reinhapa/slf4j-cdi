@@ -34,7 +34,7 @@ dependencies {
     testImplementation "junit:junit:4.12"
     testImplementation "org.hamcrest:hamcrest-core:2.1"
     testImplementation "org.jmockit:jmockit:1.47"
-    testImplementation "org.easymock:easymock:3.4"
+    testImplementation "org.easymock:easymock:4.0.2"
     asciidoclet 'org.asciidoctor:asciidoclet:1.+'
 }
 
