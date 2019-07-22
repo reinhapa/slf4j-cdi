@@ -6,7 +6,7 @@ plugins {
     id 'eclipse'
     id 'jacoco'
     id 'maven-publish'
-    id 'org.asciidoctor.convert' version '2.3.0'
+    id 'org.asciidoctor.jvm.convert' version '2.3.0'
     id 'net.nemerosa.versioning' version '2.8.2'
 }
 
@@ -83,16 +83,6 @@ jacocoTestReport {
 }
 
 check.dependsOn jacocoTestReport
-
-javadoc {
-    options.docletpath = configurations.asciidoclet.files.asType(List)
-    options.doclet = 'org.asciidoctor.Asciidoclet'
-    options.addStringOption "-base-dir", "${projectDir}"
-    options.addStringOption "-attribute",
-            "name=${project.name}," +
-            "version=${project.version}," +
-            "title-link=http://github.com/reinhapa/[${project.name} ${project.version}]"
-}
 
 publishing {
     publications {
