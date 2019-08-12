@@ -30,7 +30,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.slf4j:slf4j-api:1.7.27"
+    implementation "org.slf4j:slf4j-api:1.7.28"
     implementation "javax.enterprise:cdi-api:2.0"
     testImplementation "junit:junit:4.12"
     testImplementation "org.hamcrest:hamcrest-core:2.1"
