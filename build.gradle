@@ -35,7 +35,7 @@ dependencies {
     implementation "javax.enterprise:cdi-api:2.0"
     testImplementation "junit:junit:4.12"
     testImplementation "org.hamcrest:hamcrest-core:2.2"
-    testImplementation "org.jmockit:jmockit:1.48"
+    testImplementation "org.jmockit:jmockit:1.49"
     testImplementation "org.easymock:easymock:4.1"
     asciidoclet 'org.asciidoctor:asciidoclet:1.+'
 }
