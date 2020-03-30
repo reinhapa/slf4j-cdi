@@ -1,6 +1,8 @@
 = SLF4J CDI injection providers
 Patrick Reinhart <https://github.com/reinhapa[@reinhapa]>
-:project-full-path: reinhapa/slf4j-cdi
+:project-name: slf4j-cdi
+:group-name: net.reini
+:project-full-path: reinhapa/{project-name}
 :github-branch: master
 
 image:https://img.shields.io/badge/license-MIT-blue.svg["MIT License", link="https://github.com/{project-full-path}/blob/{github-branch}/LICENSE"]
