@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     implementation "org.slf4j:slf4j-api:1.7.30"
-    implementation 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
+    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:2.0.2'
     testImplementation "junit:junit:4.13"
     testImplementation "org.hamcrest:hamcrest-core:2.2"
     testImplementation "org.jmockit:jmockit:1.49"
@@ -87,8 +87,8 @@ jacocoTestReport {
 dependencyUpdates.resolutionStrategy {
   componentSelection { rules ->
     rules.all { ComponentSelection selection ->
-      boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'pr', 'preview'].any { qualifier ->
-        selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+      boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview', 'b', 'pr', 'ea'].any { qualifier ->
+        selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-+]*/
       }
       if (rejected) {
         selection.reject('Release candidate')
