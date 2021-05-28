@@ -33,7 +33,7 @@ repositories {
 
 dependencies {
     implementation "org.slf4j:slf4j-api:1.7.30"
-    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:2.0.2'
+    implementation 'jakarta.enterprise:jakarta.enterprise.cdi-api:3.0.0'
     testImplementation "junit:junit:4.13.2"
     testImplementation "org.hamcrest:hamcrest-core:2.2"
     testImplementation "org.jmockit:jmockit:1.49"
