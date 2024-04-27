@@ -3,5 +3,6 @@
 /target/
 /.gradle/
 /.settings/
+/.idea/
 .classpath
 .project
