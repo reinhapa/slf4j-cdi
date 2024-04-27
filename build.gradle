@@ -55,7 +55,7 @@ dependencies {
     compileOnly 'jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
     testImplementation 'org.easymock:easymock:5.2.0'
-    asciidoclet 'org.asciidoctor:asciidoclet:1.+'
+    asciidoclet 'org.asciidoctor:asciidoclet:2.+'
 }
 
 jar {
