@@ -21,7 +21,7 @@
 plugins {
   id 'eclipse'
   id 'java-library'
-  id 'com.diffplug.spotless' version '8.10.2'
+  id 'com.diffplug.spotless' version '8.10.3'
   id 'org.owasp.dependencycheck' version '13.0.0'
   id 'org.kordamp.gradle.java-project' version '0.54.0'
 }
